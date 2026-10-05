@@ -1,0 +1,3257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#075985">
+<title>EthioCare | Healthcare Platform</title>
+
+<style>
+:root{
+    --primary:#0879c9;
+    --primary2:#075985;
+    --secondary:#14b8a6;
+    --accent:#7c3aed;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --success:#16a34a;
+
+    --bg:#f3f8fc;
+    --card:rgba(255,255,255,.82);
+    --card-solid:#ffffff;
+    --text:#123047;
+    --muted:#64748b;
+    --border:rgba(15,76,129,.12);
+    --shadow:0 15px 45px rgba(15,76,129,.12);
+    --radius:24px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at top left,rgba(8,121,201,.10),transparent 30%),
+        radial-gradient(circle at bottom right,rgba(20,184,166,.10),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.3s;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* ================= NAVIGATION ================= */
+
+.nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:23px;
+    font-weight:900;
+    color:var(--primary2);
+    cursor:pointer;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    color:white;
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    box-shadow:0 8px 22px rgba(8,121,201,.25);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.nav-links button,
+.mobile-menu button{
+    border:0;
+    background:transparent;
+    color:var(--text);
+    padding:10px 13px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.nav-links button:hover,
+.mobile-menu button:hover{
+    background:rgba(8,121,201,.1);
+    color:var(--primary);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+    color:var(--text);
+    font-size:18px;
+}
+
+.menu-btn{
+    display:none;
+}
+
+.mobile-menu{
+    display:none;
+    position:fixed;
+    top:72px;
+    left:12px;
+    right:12px;
+    z-index:999;
+    padding:14px;
+    border-radius:20px;
+    background:var(--card-solid);
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+}
+
+.mobile-menu button{
+    width:100%;
+    text-align:left;
+    margin:2px 0;
+}
+
+/* ================= PAGES ================= */
+
+.page{
+    display:none;
+    min-height:calc(100vh - 72px);
+}
+
+.page.active{
+    display:block;
+    animation:pageIn .35s ease;
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* ================= HOME ================= */
+
+.hero{
+    min-height:680px;
+    display:flex;
+    align-items:center;
+    padding:60px 0;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:45px;
+    align-items:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 14px;
+    border-radius:50px;
+    background:rgba(8,121,201,.1);
+    color:var(--primary);
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(40px,6vw,72px);
+    line-height:1.03;
+    margin-bottom:20px;
+    letter-spacing:-2px;
+}
+
+.gradient-text{
+    background:linear-gradient(135deg,var(--primary),var(--secondary),var(--accent));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+    max-width:650px;
+}
+
+.hero-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+
+.btn{
+    border:0;
+    padding:13px 19px;
+    border-radius:14px;
+    font-weight:800;
+    transition:.2s;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:white;
+    box-shadow:0 10px 25px rgba(8,121,201,.2);
+}
+
+.btn-secondary{
+    background:rgba(8,121,201,.1);
+    color:var(--primary);
+}
+
+.btn-success{
+    background:var(--success);
+    color:white;
+}
+
+.btn-danger{
+    background:var(--danger);
+    color:white;
+}
+
+.btn-warning{
+    background:var(--warning);
+    color:white;
+}
+
+.btn-purple{
+    background:var(--accent);
+    color:white;
+}
+
+.btn-light{
+    background:var(--card-solid);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.hero-image{
+    position:relative;
+}
+
+.hero-image img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    border-radius:35px;
+    box-shadow:0 30px 70px rgba(15,76,129,.22);
+}
+
+.floating-card{
+    position:absolute;
+    bottom:25px;
+    left:-25px;
+    padding:18px;
+    border-radius:20px;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(18px);
+    box-shadow:var(--shadow);
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.floating-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    background:#dcfce7;
+    color:#15803d;
+}
+
+/* ================= EMERGENCY ================= */
+
+.emergency-banner{
+    margin:20px 0 50px;
+    padding:28px;
+    border-radius:28px;
+    background:linear-gradient(135deg,#dc2626,#991b1b);
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 20px 45px rgba(220,38,38,.2);
+}
+
+.emergency-banner h2{
+    margin-bottom:7px;
+}
+
+.emergency-banner p{
+    opacity:.9;
+}
+
+.emergency-number{
+    font-size:30px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+/* ================= SECTIONS ================= */
+
+.section{
+    padding:70px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-title h2{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:var(--muted);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.service-card{
+    padding:26px;
+    border-radius:var(--radius);
+    background:var(--card);
+    backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
+
+.service-card:hover{
+    transform:translateY(-7px);
+}
+
+.service-icon{
+    width:55px;
+    height:55px;
+    border-radius:17px;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    margin-bottom:18px;
+    background:rgba(8,121,201,.1);
+}
+
+.service-card h3{
+    margin-bottom:9px;
+}
+
+.service-card p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* ================= PAGE HEADER ================= */
+
+.page-content{
+    padding:45px 0 80px;
+}
+
+.page-header{
+    position:relative;
+    overflow:hidden;
+    padding:34px;
+    border-radius:30px;
+    margin-bottom:28px;
+    color:white;
+    background:
+        linear-gradient(135deg,rgba(7,89,133,.97),rgba(8,121,201,.92),rgba(20,184,166,.9));
+    box-shadow:0 20px 50px rgba(8,121,201,.2);
+}
+
+.page-header:after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    right:-70px;
+    top:-120px;
+    background:rgba(255,255,255,.12);
+}
+
+.page-header h1{
+    font-size:38px;
+    margin-top:20px;
+    position:relative;
+    z-index:1;
+}
+
+.page-header p{
+    opacity:.9;
+    margin-top:8px;
+    position:relative;
+    z-index:1;
+}
+
+.back-btn{
+    border:1px solid rgba(255,255,255,.3);
+    color:white;
+    background:rgba(255,255,255,.14);
+    backdrop-filter:blur(10px);
+    padding:10px 15px;
+    border-radius:13px;
+    font-weight:800;
+    position:relative;
+    z-index:2;
+}
+
+.back-btn:hover{
+    background:rgba(255,255,255,.25);
+}
+
+/* ================= SEARCH ================= */
+
+.search-box{
+    margin-bottom:25px;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px 18px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    background:var(--card-solid);
+    color:var(--text);
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px rgba(8,121,201,.1);
+}
+
+/* ================= HOSPITALS ================= */
+
+.hospital-grid,
+.doctor-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.hospital-card,
+.doctor-card{
+    overflow:hidden;
+    border-radius:24px;
+    background:var(--card-solid);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    transition:.25s;
+}
+
+.hospital-card:hover,
+.doctor-card:hover{
+    transform:translateY(-6px);
+}
+
+.card-image{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card-body h3{
+    margin-bottom:7px;
+}
+
+.card-body p{
+    color:var(--muted);
+    line-height:1.6;
+    margin:5px 0;
+}
+
+.card-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:16px;
+}
+
+.favorite{
+    margin-left:auto;
+    border:0;
+    background:transparent;
+    font-size:22px;
+}
+
+/* ================= FORMS ================= */
+
+.form-card{
+    max-width:850px;
+    margin:auto;
+    padding:28px;
+    border-radius:28px;
+    background:var(--card-solid);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:7px;
+    font-weight:800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:13px 14px;
+    border-radius:13px;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+}
+
+/* ================= EMERGENCY ================= */
+
+.emergency-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.emergency-card{
+    padding:25px;
+    border-radius:24px;
+    background:var(--card-solid);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.emergency-card .big-icon{
+    font-size:40px;
+    margin-bottom:14px;
+}
+
+.emergency-card h3{
+    margin-bottom:7px;
+}
+
+.emergency-card p{
+    color:var(--muted);
+    margin-bottom:15px;
+}
+
+/* ================= ACCOUNT ================= */
+
+.profile{
+    text-align:center;
+    max-width:600px;
+    margin:auto;
+    padding:35px;
+    border-radius:28px;
+    background:var(--card-solid);
+    box-shadow:var(--shadow);
+}
+
+.avatar{
+    width:85px;
+    height:85px;
+    margin:auto auto 16px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-size:32px;
+    font-weight:900;
+    color:white;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+}
+
+/* ================= ADMIN ================= */
+
+.admin-login{
+    max-width:550px;
+    margin:20px auto;
+}
+
+.admin-dashboard{
+    display:none;
+}
+
+.admin-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:25px;
+}
+
+.stat{
+    padding:22px;
+    border-radius:22px;
+    background:var(--card-solid);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+}
+
+.stat span{
+    display:block;
+    color:var(--muted);
+    margin-bottom:8px;
+}
+
+.stat strong{
+    font-size:32px;
+}
+
+.approval-section{
+    margin-top:25px;
+}
+
+.approval-list{
+    display:grid;
+    gap:15px;
+}
+
+.approval-card{
+    padding:20px;
+    border-radius:20px;
+    background:var(--card-solid);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.approval-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.approval-image{
+    width:65px;
+    height:65px;
+    border-radius:17px;
+    object-fit:cover;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.status.pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status.approved{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.status.rejected{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.empty{
+    text-align:center;
+    padding:35px;
+    color:var(--muted);
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:3000;
+    background:rgba(2,20,35,.65);
+    backdrop-filter:blur(8px);
+    padding:20px;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(650px,100%);
+    max-height:90vh;
+    overflow:auto;
+    padding:28px;
+    border-radius:28px;
+    background:var(--card-solid);
+    color:var(--text);
+    box-shadow:0 30px 90px rgba(0,0,0,.3);
+}
+
+.modal-close{
+    float:right;
+    border:0;
+    background:transparent;
+    font-size:25px;
+    color:var(--text);
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    z-index:5000;
+    padding:15px 19px;
+    border-radius:15px;
+    color:white;
+    background:#123047;
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:35px 6%;
+    text-align:center;
+    color:var(--muted);
+    border-top:1px solid var(--border);
+    margin-top:30px;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    --bg:#071521;
+    --card:rgba(15,32,45,.86);
+    --card-solid:#102231;
+    --text:#f1f7fb;
+    --muted:#b8c8d5;
+    --border:rgba(255,255,255,.10);
+    --shadow:0 18px 50px rgba(0,0,0,.35);
+    background:
+        radial-gradient(circle at top left,rgba(8,121,201,.16),transparent 30%),
+        radial-gradient(circle at bottom right,rgba(20,184,166,.12),transparent 30%),
+        var(--bg);
+}
+
+body.dark .nav{
+    background:rgba(7,21,33,.82);
+}
+
+body.dark .nav-links button,
+body.dark .mobile-menu button,
+body.dark .icon-btn{
+    color:#f1f7fb;
+}
+
+body.dark .mobile-menu{
+    background:#102231;
+}
+
+body.dark .hero p,
+body.dark .service-card p,
+body.dark .card-body p,
+body.dark .section-title p,
+body.dark .emergency-card p,
+body.dark .page-header p{
+    color:var(--muted);
+}
+
+body.dark .search-box input,
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea{
+    background:#0b1b29;
+    color:#f1f7fb;
+    border-color:rgba(255,255,255,.13);
+}
+
+body.dark .search-box input::placeholder,
+body.dark input::placeholder,
+body.dark textarea::placeholder{
+    color:#91a6b6;
+}
+
+body.dark .floating-card{
+    background:rgba(16,34,49,.94);
+    color:#f1f7fb;
+}
+
+body.dark .status.pending{
+    background:#4b3510;
+    color:#fde68a;
+}
+
+body.dark .status.approved{
+    background:#103b27;
+    color:#bbf7d0;
+}
+
+body.dark .status.rejected{
+    background:#45191c;
+    color:#fecaca;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-image{
+        order:-1;
+    }
+
+    .hero-image img{
+        height:360px;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hospital-grid,
+    .doctor-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .emergency-list{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .admin-stats{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+    .nav{
+        padding:0 4%;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .logo-icon{
+        width:37px;
+        height:37px;
+    }
+
+    .hero{
+        min-height:auto;
+        padding:35px 0 60px;
+    }
+
+    .hero h1{
+        font-size:43px;
+        letter-spacing:-1px;
+    }
+
+    .hero-image img{
+        height:290px;
+    }
+
+    .floating-card{
+        left:10px;
+        bottom:10px;
+    }
+
+    .cards,
+    .hospital-grid,
+    .doctor-grid,
+    .emergency-list,
+    .form-grid,
+    .admin-stats{
+        grid-template-columns:1fr;
+    }
+
+    .page-header{
+        padding:25px;
+    }
+
+    .page-header h1{
+        font-size:30px;
+    }
+
+    .emergency-banner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .emergency-number{
+        font-size:25px;
+    }
+
+    .approval-card{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .approval-info{
+        width:100%;
+    }
+
+    .card-actions .btn{
+        flex:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="nav">
+    <div class="logo" onclick="showPage('home')">
+        <div class="logo-icon">✚</div>
+        EthioCare
+    </div>
+
+    <div class="nav-links">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('hospitals')">Hospitals</button>
+        <button onclick="showPage('doctors')">Doctors</button>
+        <button onclick="showPage('appointments')">Appointments</button>
+        <button onclick="showPage('emergency')">Emergency</button>
+        <button onclick="showPage('payments')">Payments</button>
+        <button onclick="showPage('account')">Account</button>
+        <button onclick="showPage('admin')">Administrator</button>
+    </div>
+
+    <div class="nav-actions">
+        <button class="icon-btn" onclick="toggleDark()" id="themeBtn">🌙</button>
+        <button class="icon-btn menu-btn" onclick="toggleMenu()">☰</button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <button onclick="showPage('home')">🏠 Home</button>
+    <button onclick="showPage('hospitals')">🏥 Hospitals</button>
+    <button onclick="showPage('doctors')">👨‍⚕️ Doctors</button>
+    <button onclick="showPage('appointments')">📅 Appointments</button>
+    <button onclick="showPage('emergency')">🚨 Emergency</button>
+    <button onclick="showPage('payments')">💳 Payments</button>
+    <button onclick="showPage('account')">👤 Account</button>
+    <button onclick="showPage('hospital-register')">🏥 Register Hospital</button>
+    <button onclick="showPage('doctor-register')">👨‍⚕️ Register Doctor</button>
+    <button onclick="showPage('admin')">🔐 Administrator</button>
+</div>
+
+<!-- ================= HOME ================= -->
+
+<main id="home" class="page active">
+
+    <section class="hero">
+        <div class="container hero-grid">
+
+            <div>
+                <div class="badge">🇪🇹 Healthcare made easier</div>
+
+                <h1>
+                    Your health.<br>
+                    <span class="gradient-text">Our care.</span>
+                </h1>
+
+                <p>
+                    EthioCare connects patients with hospitals and doctors,
+                    making healthcare services easier to discover, book and manage.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showPage('hospitals')">
+                        🏥 Find Hospitals
+                    </button>
+
+                    <button class="btn btn-secondary" onclick="showPage('doctors')">
+                        👨‍⚕️ Find Doctors
+                    </button>
+
+                    <button class="btn btn-danger" onclick="showPage('emergency')">
+                        🚨 Emergency
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img
+                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85"
+                    alt="Healthcare professionals"
+                    onerror="this.src='https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1000&q=85'"
+                >
+
+                <div class="floating-card">
+                    <div class="floating-icon">✓</div>
+                    <div>
+                        <strong>Care made simple</strong>
+                        <div style="color:var(--muted);font-size:13px;">
+                            Find healthcare services
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="container">
+
+        <div class="emergency-banner">
+            <div>
+                <h2>🚨 Need urgent help?</h2>
+                <p>Open the emergency section to view available contacts.</p>
+            </div>
+
+            <button class="btn btn-light" onclick="showPage('emergency')">
+                Emergency Help
+            </button>
+        </div>
+
+    </div>
+
+    <section class="section">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Everything you need</h2>
+                <p>Healthcare services in one convenient place.</p>
+            </div>
+
+            <div class="cards">
+
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Hospitals</h3>
+                    <p>Explore registered hospitals and their available services.</p>
+                    <button class="btn btn-secondary" style="margin-top:15px;" onclick="showPage('hospitals')">
+                        Explore
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👨‍⚕️</div>
+                    <h3>Doctors</h3>
+                    <p>Find doctors by specialty and request appointments.</p>
+                    <button class="btn btn-secondary" style="margin-top:15px;" onclick="showPage('doctors')">
+                        Find Doctor
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📅</div>
+                    <h3>Appointments</h3>
+                    <p>Manage your healthcare appointments easily.</p>
+                    <button class="btn btn-secondary" style="margin-top:15px;" onclick="showPage('appointments')">
+                        Book
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3>Payments</h3>
+                    <p>Manage your healthcare payment information.</p>
+                    <button class="btn btn-secondary" style="margin-top:15px;" onclick="showPage('payments')">
+                        Payments
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Join EthioCare</h2>
+                <p>Hospitals and doctors can register and become part of the platform.</p>
+            </div>
+
+            <div class="cards">
+
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Hospital Registration</h3>
+                    <p>Register your hospital for administrator review and approval.</p>
+                    <button class="btn btn-primary" style="margin-top:15px;" onclick="showPage('hospital-register')">
+                        Register Hospital
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3>Doctor Registration</h3>
+                    <p>Doctors can submit their information for administrator approval.</p>
+                    <button class="btn btn-primary" style="margin-top:15px;" onclick="showPage('doctor-register')">
+                        Register Doctor
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔐</div>
+                    <h3>Administrator</h3>
+                    <p>Authorized administrators can review registrations and manage approvals.</p>
+                    <button class="btn btn-purple" style="margin-top:15px;" onclick="showPage('admin')">
+                        Administrator
+                    </button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">❤️</div>
+                    <h3>Patient Account</h3>
+                    <p>Create an account to manage appointments and your profile.</p>
+                    <button class="btn btn-primary" style="margin-top:15px;" onclick="showPage('account')">
+                        My Account
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ================= HOSPITALS ================= -->
+
+<main id="hospitals" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>🏥 Hospitals</h1>
+            <p>Find hospitals available through EthioCare.</p>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="search"
+                id="hospitalSearch"
+                placeholder="Search hospital, city or service..."
+                oninput="renderHospitals()"
+            >
+        </div>
+
+        <div class="hospital-grid" id="hospitalList"></div>
+
+    </div>
+</main>
+
+<!-- ================= DOCTORS ================= -->
+
+<main id="doctors" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>👨‍⚕️ Doctors</h1>
+            <p>Find healthcare professionals by specialty.</p>
+        </div>
+
+        <div class="search-box">
+            <input
+                type="search"
+                id="doctorSearch"
+                placeholder="Search doctor or specialty..."
+                oninput="renderDoctors()"
+            >
+        </div>
+
+        <div class="doctor-grid" id="doctorList"></div>
+
+    </div>
+</main>
+
+<!-- ================= APPOINTMENTS ================= -->
+
+<main id="appointments" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>📅 Appointments</h1>
+            <p>Request an appointment with a doctor.</p>
+        </div>
+
+        <div class="form-card">
+
+            <form onsubmit="saveAppointment(event)">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Patient Name</label>
+                        <input id="appointmentName" required placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input id="appointmentPhone" required placeholder="Phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Doctor</label>
+                        <select id="appointmentDoctor" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" id="appointmentTime" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Reason</label>
+                        <input id="appointmentReason" required placeholder="Reason for visit">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Additional Notes</label>
+                        <textarea id="appointmentNotes" placeholder="Anything the doctor should know?"></textarea>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    📅 Request Appointment
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- ================= EMERGENCY ================= -->
+
+<main id="emergency" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>🚨 Emergency</h1>
+            <p>For urgent situations, contact the appropriate emergency service.</p>
+        </div>
+
+        <div class="emergency-banner">
+            <div>
+                <h2>Act quickly in an emergency</h2>
+                <p>Use local emergency services or go to the nearest emergency department.</p>
+            </div>
+
+            <div class="emergency-number">🚑</div>
+        </div>
+
+        <div class="emergency-list">
+
+            <div class="emergency-card">
+                <div class="big-icon">🚑</div>
+                <h3>Medical Emergency</h3>
+                <p>For urgent medical assistance.</p>
+                <a class="btn btn-danger" href="tel:991">📞 Call Emergency</a>
+            </div>
+
+            <div class="emergency-card">
+                <div class="big-icon">🚒</div>
+                <h3>Fire & Rescue</h3>
+                <p>For fire or rescue emergencies.</p>
+                <a class="btn btn-danger" href="tel:939">📞 Call Rescue</a>
+            </div>
+
+            <div class="emergency-card">
+                <div class="big-icon">👮</div>
+                <h3>Police</h3>
+                <p>For immediate security emergencies.</p>
+                <a class="btn btn-danger" href="tel:991">📞 Call Police</a>
+            </div>
+
+        </div>
+
+        <p style="margin-top:20px;color:var(--muted);text-align:center;">
+            Emergency numbers should be verified and configured for the location where EthioCare is deployed.
+        </p>
+
+    </div>
+</main>
+
+<!-- ================= PAYMENTS ================= -->
+
+<main id="payments" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>💳 Payments</h1>
+            <p>Manage healthcare payment information.</p>
+        </div>
+
+        <div class="form-card">
+
+            <div style="text-align:center;margin-bottom:25px;">
+                <div style="font-size:55px;">💳</div>
+                <h2>Payment</h2>
+                <p style="color:var(--muted);margin-top:7px;">
+                    This is a frontend demonstration. No real money is charged.
+                </p>
+            </div>
+
+            <form onsubmit="makePayment(event)">
+
+                <div class="form-group">
+                    <label>Patient Name</label>
+                    <input id="paymentName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Service</label>
+                    <select id="paymentService" required>
+                        <option value="">Select service</option>
+                        <option>Hospital Consultation</option>
+                        <option>Doctor Appointment</option>
+                        <option>Laboratory Service</option>
+                        <option>Medicine</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="paymentAmount" min="1" required placeholder="Amount">
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="paymentMethod" required>
+                        <option value="">Select method</option>
+                        <option>Cash</option>
+                        <option>Telebirr</option>
+                        <option>Bank Transfer</option>
+                        <option>Card</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    💳 Continue Payment
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- ================= ACCOUNT ================= -->
+
+<main id="account" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>👤 Account</h1>
+            <p>Create an account or sign in to EthioCare.</p>
+        </div>
+
+        <div id="accountContent"></div>
+
+    </div>
+</main>
+
+<!-- ================= HOSPITAL REGISTER ================= -->
+
+<main id="hospital-register" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>🏥 Register Hospital</h1>
+            <p>Submit your hospital for administrator review.</p>
+        </div>
+
+        <div class="form-card">
+
+            <form onsubmit="registerHospital(event)">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Hospital Name</label>
+                        <input id="regHospitalName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <input id="regHospitalCity" required placeholder="e.g. Addis Ababa">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input id="regHospitalPhone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input id="regHospitalAddress" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Services</label>
+                        <input id="regHospitalServices" required placeholder="e.g. Emergency, Cardiology, Pediatrics">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Hospital Image URL (optional)</label>
+                        <input id="regHospitalImage" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Description</label>
+                        <textarea id="regHospitalDescription" required></textarea>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    📤 Submit Hospital
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- ================= DOCTOR REGISTER ================= -->
+
+<main id="doctor-register" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>👨‍⚕️ Register Doctor</h1>
+            <p>Submit your professional information for administrator review.</p>
+        </div>
+
+        <div class="form-card">
+
+            <form onsubmit="registerDoctor(event)">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input id="regDoctorName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Specialty</label>
+                        <input id="regDoctorSpecialty" required placeholder="e.g. Cardiologist">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hospital</label>
+                        <input id="regDoctorHospital" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input id="regDoctorPhone" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Doctor Image URL (optional)</label>
+                        <input id="regDoctorImage" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Professional Bio</label>
+                        <textarea id="regDoctorBio" required></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Availability</label>
+                        <input id="regDoctorAvailability" required placeholder="e.g. Monday - Friday, 9:00 AM - 4:00 PM">
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    📤 Submit Doctor Registration
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- ================= ADMIN ================= -->
+
+<main id="admin" class="page">
+    <div class="container page-content">
+
+        <div class="page-header">
+            <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+            <h1>🔐 Administrator</h1>
+            <p>Authorized administrators can review registrations and manage approvals.</p>
+        </div>
+
+        <!-- LOGIN / SETUP -->
+        <div id="adminLoginArea" class="form-card admin-login">
+
+            <div style="text-align:center;margin-bottom:25px;">
+                <div style="font-size:55px;">🔐</div>
+                <h2 id="adminFormTitle">Administrator Login</h2>
+                <p style="color:var(--muted);margin-top:8px;">
+                    Enter the administrator name and password.
+                </p>
+            </div>
+
+            <form onsubmit="adminLogin(event)">
+
+                <div class="form-group">
+                    <label>Administrator Name</label>
+                    <input id="adminName" required autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input id="adminPassword" type="password" required autocomplete="current-password">
+                </div>
+
+                <button class="btn btn-purple" style="width:100%;" type="submit">
+                    🔐 Enter Administrator Area
+                </button>
+
+            </form>
+
+            <div id="adminSetupArea" style="display:none;margin-top:25px;padding-top:25px;border-top:1px solid var(--border);">
+
+                <h3 style="margin-bottom:8px;">First-time Administrator Setup</h3>
+
+                <p style="color:var(--muted);margin-bottom:18px;">
+                    No administrator account exists on this browser yet.
+                    Create one to access the administrator area.
+                </p>
+
+                <form onsubmit="createAdmin(event)">
+
+                    <div class="form-group">
+                        <label>Create Administrator Name</label>
+                        <input id="newAdminName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Create Administrator Password</label>
+                        <input id="newAdminPassword" type="password" minlength="6" required>
+                    </div>
+
+                    <button class="btn btn-primary" style="width:100%;" type="submit">
+                        Create Administrator Account
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="adminDashboard" class="admin-dashboard">
+
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px;">
+                <div>
+                    <h2>Administrator Dashboard</h2>
+                    <p style="color:var(--muted);margin-top:5px;">
+                        Review and manage submitted registrations.
+                    </p>
+                </div>
+
+                <button class="btn btn-danger" onclick="adminLogout()">
+                    Logout
+                </button>
+            </div>
+
+            <div class="admin-stats">
+
+                <div class="stat">
+                    <span>Pending Hospitals</span>
+                    <strong id="pendingHospitalCount">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span>Approved Hospitals</span>
+                    <strong id="approvedHospitalCount">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span>Pending Doctors</span>
+                    <strong id="pendingDoctorCount">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span>Approved Doctors</span>
+                    <strong id="approvedDoctorCount">0</strong>
+                </div>
+
+            </div>
+
+            <div class="approval-section">
+
+                <h2 style="margin-bottom:15px;">🏥 Hospital Approvals</h2>
+
+                <div id="hospitalApprovals" class="approval-list"></div>
+
+            </div>
+
+            <div class="approval-section">
+
+                <h2 style="margin-bottom:15px;">👨‍⚕️ Doctor Approvals</h2>
+
+                <div id="doctorApprovals" class="approval-list"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+    <strong>EthioCare</strong>
+    <p style="margin-top:7px;">
+        Connecting people with healthcare services.
+    </p>
+    <p style="margin-top:10px;font-size:13px;">
+        © 2026 EthioCare
+    </p>
+</footer>
+
+<script>
+
+/* =========================================================
+   ETHIOCARE DATABASE - FRONTEND DEMO
+========================================================= */
+
+const defaultHospitals = [
+
+    {
+        id:"h1",
+        name:"St. Paul's Hospital",
+        city:"Addis Ababa",
+        address:"Addis Ababa",
+        phone:"0112760000",
+        services:"General Medicine, Surgery, Emergency",
+        description:"A major healthcare institution providing a wide range of medical services.",
+        image:"https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=900&q=80",
+        status:"approved",
+        registered:false
+    },
+
+    {
+        id:"h2",
+        name:"Tikur Anbessa Specialized Hospital",
+        city:"Addis Ababa",
+        address:"Addis Ababa",
+        phone:"0115511211",
+        services:"Specialized Care, Surgery, Oncology",
+        description:"A specialized healthcare facility with multiple medical departments.",
+        image:"https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80",
+        status:"approved",
+        registered:false
+    },
+
+    {
+        id:"h3",
+        name:"EthioCare Medical Center",
+        city:"Addis Ababa",
+        address:"Bole",
+        phone:"0110000000",
+        services:"Family Medicine, Pediatrics, Laboratory",
+        description:"A modern medical center providing patient-focused healthcare services.",
+        image:"https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80",
+        status:"approved",
+        registered:false
+    }
+
+];
+
+const defaultDoctors = [
+
+    {
+        id:"d1",
+        name:"Dr. Hana",
+        specialty:"General Medicine",
+        hospital:"St. Paul's Hospital",
+        phone:"0900000000",
+        bio:"General medicine physician providing patient-centered healthcare.",
+        availability:"Monday - Friday",
+        image:"https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=80",
+        status:"approved",
+        registered:false
+    },
+
+    {
+        id:"d2",
+        name:"Dr. Daniel",
+        specialty:"Cardiology",
+        hospital:"Tikur Anbessa Specialized Hospital",
+        phone:"0910000000",
+        bio:"Cardiology specialist focused on cardiovascular health.",
+        availability:"Monday - Thursday",
+        image:"https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=80",
+        status:"approved",
+        registered:false
+    },
+
+    {
+        id:"d3",
+        name:"Dr. Meron",
+        specialty:"Pediatrics",
+        hospital:"EthioCare Medical Center",
+        phone:"0920000000",
+        bio:"Pediatric doctor focused on children's health and wellbeing.",
+        availability:"Tuesday - Saturday",
+        image:"https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=80",
+        status:"approved",
+        registered:false
+    }
+
+];
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function getHospitals(){
+    return JSON.parse(localStorage.getItem("ethioHospitals") || "[]");
+}
+
+function getDoctors(){
+    return JSON.parse(localStorage.getItem("ethioDoctors") || "[]");
+}
+
+function saveHospitals(data){
+    localStorage.setItem("ethioHospitals",JSON.stringify(data));
+}
+
+function saveDoctors(data){
+    localStorage.setItem("ethioDoctors",JSON.stringify(data));
+}
+
+function getAllHospitals(){
+    return defaultHospitals.concat(
+        getHospitals().filter(x => x.status === "approved")
+    );
+}
+
+function getAllDoctors(){
+    return defaultDoctors.concat(
+        getDoctors().filter(x => x.status === "approved")
+    );
+}
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function showPage(page){
+
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+
+    const target=document.getElementById(page);
+
+    if(!target){
+        return;
+    }
+
+    target.classList.add("active");
+
+    closeMenu();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(page==="hospitals"){
+        renderHospitals();
+    }
+
+    if(page==="doctors"){
+        renderDoctors();
+    }
+
+    if(page==="appointments"){
+        loadAppointmentDoctors();
+    }
+
+    if(page==="account"){
+        renderAccount();
+    }
+
+    if(page==="admin"){
+        updateAdminScreen();
+    }
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+function toggleMenu(){
+
+    const menu=document.getElementById("mobileMenu");
+
+    menu.style.display =
+        menu.style.display==="block"
+        ? "none"
+        : "block";
+}
+
+function closeMenu(){
+    document.getElementById("mobileMenu").style.display="none";
+}
+
+/* =========================================================
+   HOSPITALS
+========================================================= */
+
+function renderHospitals(){
+
+    const list=document.getElementById("hospitalList");
+
+    if(!list) return;
+
+    const query=(document.getElementById("hospitalSearch")?.value || "")
+        .toLowerCase()
+        .trim();
+
+    const hospitals=getAllHospitals().filter(h => {
+
+        const text=(
+            h.name+" "+
+            h.city+" "+
+            h.address+" "+
+            h.services
+        ).toLowerCase();
+
+        return text.includes(query);
+    });
+
+    if(!hospitals.length){
+
+        list.innerHTML=`
+            <div class="empty" style="grid-column:1/-1;">
+                <div style="font-size:45px;">🏥</div>
+                <h3>No hospitals found</h3>
+                <p>Try another search.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    list.innerHTML=hospitals.map(h=>`
+
+        <article class="hospital-card">
+
+            <img
+                class="card-image"
+                src="${safeImage(h.image)}"
+                alt="${escapeHTML(h.name)}"
+            >
+
+            <div class="card-body">
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                    <div style="flex:1;">
+                        <h3>${escapeHTML(h.name)}</h3>
+                        <p>📍 ${escapeHTML(h.city)}</p>
+                    </div>
+
+                    <button
+                        class="favorite"
+                        onclick="favoriteHospital('${h.id}')"
+                        title="Favorite"
+                    >♡</button>
+                </div>
+
+                <p>🩺 ${escapeHTML(h.services)}</p>
+                <p>📞 ${escapeHTML(h.phone)}</p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="hospitalDetails('${h.id}')"
+                    >
+                        Details
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="bookHospital('${h.id}')"
+                    >
+                        Book
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+}
+
+function hospitalDetails(id){
+
+    const h=getAllHospitals().find(x=>x.id===id);
+
+    if(!h) return;
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <img
+            src="${safeImage(h.image)}"
+            style="width:100%;height:250px;object-fit:cover;border-radius:20px;margin-bottom:20px;"
+        >
+
+        <h2>${escapeHTML(h.name)}</h2>
+
+        <p style="color:var(--muted);margin-top:10px;">
+            📍 ${escapeHTML(h.address)}
+        </p>
+
+        <p style="color:var(--muted);margin-top:7px;">
+            📞 ${escapeHTML(h.phone)}
+        </p>
+
+        <h3 style="margin-top:20px;">Services</h3>
+
+        <p style="color:var(--muted);margin-top:7px;">
+            ${escapeHTML(h.services)}
+        </p>
+
+        <h3 style="margin-top:20px;">About</h3>
+
+        <p style="color:var(--muted);margin-top:7px;line-height:1.7;">
+            ${escapeHTML(h.description)}
+        </p>
+
+        <button
+            class="btn btn-primary"
+            style="margin-top:20px;"
+            onclick="closeModal();bookHospital('${h.id}')"
+        >
+            📅 Book Appointment
+        </button>
+    `;
+
+    openModal();
+}
+
+function bookHospital(id){
+
+    const h=getAllHospitals().find(x=>x.id===id);
+
+    if(!h) return;
+
+    loadAppointmentDoctors();
+
+    showPage("appointments");
+
+    showToast("Choose a doctor to continue your appointment request.");
+}
+
+function favoriteHospital(id){
+
+    let fav=JSON.parse(
+        localStorage.getItem("ethioFavorites") || "[]"
+    );
+
+    if(fav.includes(id)){
+        fav=fav.filter(x=>x!==id);
+        showToast("Removed from favorites.");
+    }else{
+        fav.push(id);
+        showToast("Added to favorites ❤️");
+    }
+
+    localStorage.setItem(
+        "ethioFavorites",
+        JSON.stringify(fav)
+    );
+}
+
+/* =========================================================
+   DOCTORS
+========================================================= */
+
+function renderDoctors(){
+
+    const list=document.getElementById("doctorList");
+
+    if(!list) return;
+
+    const query=(document.getElementById("doctorSearch")?.value || "")
+        .toLowerCase()
+        .trim();
+
+    const doctors=getAllDoctors().filter(d=>{
+
+        const text=(
+            d.name+" "+
+            d.specialty+" "+
+            d.hospital
+        ).toLowerCase();
+
+        return text.includes(query);
+    });
+
+    if(!doctors.length){
+
+        list.innerHTML=`
+            <div class="empty" style="grid-column:1/-1;">
+                <div style="font-size:45px;">👨‍⚕️</div>
+                <h3>No doctors found</h3>
+                <p>Try another search.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    list.innerHTML=doctors.map(d=>`
+
+        <article class="doctor-card">
+
+            <img
+                class="card-image"
+                src="${safeImage(d.image)}"
+                alt="${escapeHTML(d.name)}"
+            >
+
+            <div class="card-body">
+
+                <h3>${escapeHTML(d.name)}</h3>
+
+                <p><strong>${escapeHTML(d.specialty)}</strong></p>
+
+                <p>🏥 ${escapeHTML(d.hospital)}</p>
+
+                <p>🕒 ${escapeHTML(d.availability)}</p>
+
+                <div class="card-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="doctorDetails('${d.id}')"
+                    >
+                        Details
+                    </button>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="bookDoctor('${d.id}')"
+                    >
+                        Book
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `).join("");
+}
+
+function doctorDetails(id){
+
+    const d=getAllDoctors().find(x=>x.id===id);
+
+    if(!d) return;
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div style="display:flex;gap:18px;align-items:center;margin-bottom:20px;">
+
+            <img
+                src="${safeImage(d.image)}"
+                style="width:100px;height:100px;object-fit:cover;border-radius:25px;"
+            >
+
+            <div>
+                <h2>${escapeHTML(d.name)}</h2>
+                <p style="color:var(--primary);font-weight:800;">
+                    ${escapeHTML(d.specialty)}
+                </p>
+            </div>
+
+        </div>
+
+        <p style="color:var(--muted);margin-top:10px;">
+            🏥 ${escapeHTML(d.hospital)}
+        </p>
+
+        <p style="color:var(--muted);margin-top:10px;">
+            🕒 ${escapeHTML(d.availability)}
+        </p>
+
+        <p style="color:var(--muted);margin-top:15px;line-height:1.7;">
+            ${escapeHTML(d.bio)}
+        </p>
+
+        <button
+            class="btn btn-primary"
+            style="margin-top:20px;"
+            onclick="closeModal();bookDoctor('${d.id}')"
+        >
+            📅 Book Appointment
+        </button>
+    `;
+
+    openModal();
+}
+
+function bookDoctor(id){
+
+    const d=getAllDoctors().find(x=>x.id===id);
+
+    if(!d) return;
+
+    showPage("appointments");
+
+    loadAppointmentDoctors();
+
+    setTimeout(()=>{
+
+        const select=document.getElementById("appointmentDoctor");
+
+        if(select){
+            select.value=d.id;
+        }
+
+    },100);
+
+    showToast("Doctor selected.");
+}
+
+/* =========================================================
+   APPOINTMENTS
+========================================================= */
+
+function loadAppointmentDoctors(){
+
+    const select=document.getElementById("appointmentDoctor");
+
+    if(!select) return;
+
+    const doctors=getAllDoctors();
+
+    select.innerHTML=`
+        <option value="">Select doctor</option>
+        ${doctors.map(d=>`
+            <option value="${d.id}">
+                ${escapeHTML(d.name)} — ${escapeHTML(d.specialty)}
+            </option>
+        `).join("")}
+    `;
+}
+
+function saveAppointment(event){
+
+    event.preventDefault();
+
+    const appointment={
+
+        id:"a"+Date.now(),
+
+        name:document.getElementById("appointmentName").value,
+
+        phone:document.getElementById("appointmentPhone").value,
+
+        doctor:document.getElementById("appointmentDoctor").value,
+
+        date:document.getElementById("appointmentDate").value,
+
+        time:document.getElementById("appointmentTime").value,
+
+        reason:document.getElementById("appointmentReason").value,
+
+        notes:document.getElementById("appointmentNotes").value,
+
+        status:"Pending",
+
+        createdAt:new Date().toISOString()
+    };
+
+    const data=JSON.parse(
+        localStorage.getItem("ethioAppointments") || "[]"
+    );
+
+    data.push(appointment);
+
+    localStorage.setItem(
+        "ethioAppointments",
+        JSON.stringify(data)
+    );
+
+    event.target.reset();
+
+    showToast("Appointment request submitted successfully! 📅");
+}
+
+/* =========================================================
+   PAYMENTS
+========================================================= */
+
+function makePayment(event){
+
+    event.preventDefault();
+
+    const payment={
+
+        id:"p"+Date.now(),
+
+        name:document.getElementById("paymentName").value,
+
+        service:document.getElementById("paymentService").value,
+
+        amount:document.getElementById("paymentAmount").value,
+
+        method:document.getElementById("paymentMethod").value,
+
+        date:new Date().toISOString()
+
+    };
+
+    const payments=JSON.parse(
+        localStorage.getItem("ethioPayments") || "[]"
+    );
+
+    payments.push(payment);
+
+    localStorage.setItem(
+        "ethioPayments",
+        JSON.stringify(payments)
+    );
+
+    event.target.reset();
+
+    showToast("Payment information saved as a demo transaction. 💳");
+}
+
+/* =========================================================
+   NORMAL USER ACCOUNT
+========================================================= */
+
+function renderAccount(){
+
+    const area=document.getElementById("accountContent");
+
+    const user=JSON.parse(
+        localStorage.getItem("ethioUser") || "null"
+    );
+
+    if(user){
+
+        area.innerHTML=`
+
+            <div class="profile">
+
+                <div class="avatar">
+                    ${escapeHTML(
+                        (user.name || "U")
+                        .charAt(0)
+                        .toUpperCase()
+                    )}
+                </div>
+
+                <h2>${escapeHTML(user.name)}</h2>
+
+                <p style="color:var(--muted);margin-top:8px;">
+                    ${escapeHTML(user.email)}
+                </p>
+
+                <p style="color:var(--muted);margin-top:6px;">
+                    ${escapeHTML(user.phone || "")}
+                </p>
+
+                <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px;">
+
+                    <button class="btn btn-primary" onclick="showPage('appointments')">
+                        My Appointments
+                    </button>
+
+                    <button class="btn btn-danger" onclick="logoutUser()">
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    area.innerHTML=`
+
+        <div class="form-card">
+
+            <div style="display:flex;justify-content:center;gap:8px;margin-bottom:25px;">
+                <button class="btn btn-primary" onclick="switchAccountForm('login')">
+                    Login
+                </button>
+
+                <button class="btn btn-secondary" onclick="switchAccountForm('register')">
+                    Register
+                </button>
+            </div>
+
+            <div id="accountFormArea"></div>
+
+        </div>
+    `;
+
+    switchAccountForm("login");
+}
+
+function switchAccountForm(type){
+
+    const area=document.getElementById("accountFormArea");
+
+    if(!area) return;
+
+    if(type==="login"){
+
+        area.innerHTML=`
+
+            <h2 style="margin-bottom:7px;">Welcome back</h2>
+
+            <p style="color:var(--muted);margin-bottom:20px;">
+                Sign in to your EthioCare account.
+            </p>
+
+            <form onsubmit="loginUser(event)">
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="loginEmail" type="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input id="loginPassword" type="password" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    Login
+                </button>
+
+            </form>
+        `;
+
+    }else{
+
+        area.innerHTML=`
+
+            <h2 style="margin-bottom:7px;">Create account</h2>
+
+            <p style="color:var(--muted);margin-bottom:20px;">
+                Register as a patient.
+            </p>
+
+            <form onsubmit="registerUser(event)">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input id="registerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input id="registerEmail" type="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input id="registerPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input id="registerPassword" type="password" minlength="6" required>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    Create Account
+                </button>
+
+            </form>
+        `;
+    }
+}
+
+function registerUser(event){
+
+    event.preventDefault();
+
+    const user={
+
+        name:document.getElementById("registerName").value,
+
+        email:document.getElementById("registerEmail").value,
+
+        phone:document.getElementById("registerPhone").value,
+
+        password:document.getElementById("registerPassword").value
+
+    };
+
+    localStorage.setItem(
+        "ethioUserAccount",
+        JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+        "ethioUser",
+        JSON.stringify(user)
+    );
+
+    showToast("Account created successfully! 🎉");
+
+    renderAccount();
+}
+
+function loginUser(event){
+
+    event.preventDefault();
+
+    const account=JSON.parse(
+        localStorage.getItem("ethioUserAccount") || "null"
+    );
+
+    if(!account){
+
+        showToast("Please create an account first.");
+
+        return;
+    }
+
+    const email=document.getElementById("loginEmail").value;
+
+    const password=document.getElementById("loginPassword").value;
+
+    if(
+        email===account.email &&
+        password===account.password
+    ){
+
+        localStorage.setItem(
+            "ethioUser",
+            JSON.stringify(account)
+        );
+
+        showToast("Welcome back! 👋");
+
+        renderAccount();
+
+    }else{
+
+        showToast("Incorrect email or password.");
+    }
+}
+
+function logoutUser(){
+
+    localStorage.removeItem("ethioUser");
+
+    renderAccount();
+
+    showToast("You have been logged out.");
+}
+
+/* =========================================================
+   HOSPITAL REGISTRATION
+========================================================= */
+
+function registerHospital(event){
+
+    event.preventDefault();
+
+    const hospital={
+
+        id:"rh"+Date.now(),
+
+        name:document.getElementById("regHospitalName").value,
+
+        city:document.getElementById("regHospitalCity").value,
+
+        phone:document.getElementById("regHospitalPhone").value,
+
+        address:document.getElementById("regHospitalAddress").value,
+
+        services:document.getElementById("regHospitalServices").value,
+
+        image:
+            document.getElementById("regHospitalImage").value ||
+            "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80",
+
+        description:document.getElementById("regHospitalDescription").value,
+
+        status:"pending",
+
+        registered:true,
+
+        createdAt:new Date().toISOString()
+
+    };
+
+    const data=getHospitals();
+
+    data.push(hospital);
+
+    saveHospitals(data);
+
+    event.target.reset();
+
+    showToast("Hospital submitted for administrator approval. 🏥");
+}
+
+/* =========================================================
+   DOCTOR REGISTRATION
+========================================================= */
+
+function registerDoctor(event){
+
+    event.preventDefault();
+
+    const doctor={
+
+        id:"rd"+Date.now(),
+
+        name:document.getElementById("regDoctorName").value,
+
+        specialty:document.getElementById("regDoctorSpecialty").value,
+
+        hospital:document.getElementById("regDoctorHospital").value,
+
+        phone:document.getElementById("regDoctorPhone").value,
+
+        image:
+            document.getElementById("regDoctorImage").value ||
+            "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=80",
+
+        bio:document.getElementById("regDoctorBio").value,
+
+        availability:document.getElementById("regDoctorAvailability").value,
+
+        status:"pending",
+
+        registered:true,
+
+        createdAt:new Date().toISOString()
+
+    };
+
+    const data=getDoctors();
+
+    data.push(doctor);
+
+    saveDoctors(data);
+
+    event.target.reset();
+
+    showToast("Doctor registration submitted for approval. 👨‍⚕️");
+}
+
+/* =========================================================
+   ADMINISTRATOR
+========================================================= */
+
+function hasAdmin(){
+
+    return !!localStorage.getItem("ethioAdmin");
+}
+
+function createAdmin(event){
+
+    event.preventDefault();
+
+    const name=document.getElementById("newAdminName").value.trim();
+
+    const password=document.getElementById("newAdminPassword").value;
+
+    if(!name || password.length<6){
+
+        showToast("Use a name and a password of at least 6 characters.");
+
+        return;
+    }
+
+    const admin={
+        name:name,
+        password:password
+    };
+
+    localStorage.setItem(
+        "ethioAdmin",
+        JSON.stringify(admin)
+    );
+
+    localStorage.setItem(
+        "ethioAdminLoggedIn",
+        "true"
+    );
+
+    showToast("Administrator account created.");
+
+    updateAdminScreen();
+}
+
+function adminLogin(event){
+
+    event.preventDefault();
+
+    const admin=JSON.parse(
+        localStorage.getItem("ethioAdmin") || "null"
+    );
+
+    if(!admin){
+
+        showToast("Create the first administrator account below.");
+
+        const setup=document.getElementById("adminSetupArea");
+
+        if(setup){
+            setup.style.display="block";
+        }
+
+        return;
+    }
+
+    const name=document.getElementById("adminName").value.trim();
+
+    const password=document.getElementById("adminPassword").value;
+
+    if(
+        name===admin.name &&
+        password===admin.password
+    ){
+
+        localStorage.setItem(
+            "ethioAdminLoggedIn",
+            "true"
+        );
+
+        showToast("Administrator access granted. 🔐");
+
+        updateAdminScreen();
+
+    }else{
+
+        showToast("Incorrect administrator name or password.");
+    }
+}
+
+function adminLogout(){
+
+    localStorage.removeItem("ethioAdminLoggedIn");
+
+    updateAdminScreen();
+
+    showToast("Administrator logged out.");
+}
+
+function updateAdminScreen(){
+
+    const loginArea=document.getElementById("adminLoginArea");
+
+    const dashboard=document.getElementById("adminDashboard");
+
+    const setup=document.getElementById("adminSetupArea");
+
+    if(!loginArea || !dashboard) return;
+
+    const loggedIn=
+        localStorage.getItem("ethioAdminLoggedIn")==="true";
+
+    const exists=hasAdmin();
+
+    if(loggedIn){
+
+        loginArea.style.display="none";
+
+        dashboard.style.display="block";
+
+        renderAdminDashboard();
+
+    }else{
+
+        loginArea.style.display="block";
+
+        dashboard.style.display="none";
+
+        if(setup){
+
+            setup.style.display=exists
+                ? "none"
+                : "block";
+        }
+    }
+}
+
+function renderAdminDashboard(){
+
+    const hospitals=getHospitals();
+
+    const doctors=getDoctors();
+
+    const pendingHospitals=
+        hospitals.filter(h=>h.status==="pending");
+
+    const approvedHospitals=
+        hospitals.filter(h=>h.status==="approved");
+
+    const pendingDoctors=
+        doctors.filter(d=>d.status==="pending");
+
+    const approvedDoctors=
+        doctors.filter(d=>d.status==="approved");
+
+    document.getElementById("pendingHospitalCount").textContent=
+        pendingHospitals.length;
+
+    document.getElementById("approvedHospitalCount").textContent=
+        approvedHospitals.length + defaultHospitals.length;
+
+    document.getElementById("pendingDoctorCount").textContent=
+        pendingDoctors.length;
+
+    document.getElementById("approvedDoctorCount").textContent=
+        approvedDoctors.length + defaultDoctors.length;
+
+    renderHospitalApprovals(hospitals);
+
+    renderDoctorApprovals(doctors);
+}
+
+function renderHospitalApprovals(hospitals){
+
+    const area=document.getElementById("hospitalApprovals");
+
+    const pending=hospitals.filter(
+        h=>h.status==="pending"
+    );
+
+    if(!pending.length){
+
+        area.innerHTML=`
+            <div class="empty">
+                <div style="font-size:40px;">✓</div>
+                <p>No pending hospital registrations.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    area.innerHTML=pending.map(h=>`
+
+        <div class="approval-card">
+
+            <div class="approval-info">
+
+                <img
+                    class="approval-image"
+                    src="${safeImage(h.image)}"
+                >
+
+                <div>
+
+                    <h3>${escapeHTML(h.name)}</h3>
+
+                    <p style="color:var(--muted);">
+                        📍 ${escapeHTML(h.city)}
+                    </p>
+
+                    <p style="color:var(--muted);">
+                        🩺 ${escapeHTML(h.services)}
+                    </p>
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+
+                <button
+                    class="btn btn-success"
+                    onclick="approveHospital('${h.id}')"
+                >
+                    ✓ Approve
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="rejectHospital('${h.id}')"
+                >
+                    ✕ Reject
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function renderDoctorApprovals(doctors){
+
+    const area=document.getElementById("doctorApprovals");
+
+    const pending=doctors.filter(
+        d=>d.status==="pending"
+    );
+
+    if(!pending.length){
+
+        area.innerHTML=`
+            <div class="empty">
+                <div style="font-size:40px;">✓</div>
+                <p>No pending doctor registrations.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    area.innerHTML=pending.map(d=>`
+
+        <div class="approval-card">
+
+            <div class="approval-info">
+
+                <img
+                    class="approval-image"
+                    src="${safeImage(d.image)}"
+                >
+
+                <div>
+
+                    <h3>${escapeHTML(d.name)}</h3>
+
+                    <p style="color:var(--muted);">
+                        ${escapeHTML(d.specialty)}
+                    </p>
+
+                    <p style="color:var(--muted);">
+                        🏥 ${escapeHTML(d.hospital)}
+                    </p>
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+
+                <button
+                    class="btn btn-success"
+                    onclick="approveDoctor('${d.id}')"
+                >
+                    ✓ Approve
+                </button>
+
+                <button
+                    class="btn btn-danger"
+                    onclick="rejectDoctor('${d.id}')"
+                >
+                    ✕ Reject
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function approveHospital(id){
+
+    const data=getHospitals();
+
+    const item=data.find(h=>h.id===id);
+
+    if(!item) return;
+
+    item.status="approved";
+
+    saveHospitals(data);
+
+    renderAdminDashboard();
+
+    showToast("Hospital approved. 🏥");
+}
+
+function rejectHospital(id){
+
+    const data=getHospitals();
+
+    const item=data.find(h=>h.id===id);
+
+    if(!item) return;
+
+    item.status="rejected";
+
+    saveHospitals(data);
+
+    renderAdminDashboard();
+
+    showToast("Hospital rejected.");
+}
+
+function approveDoctor(id){
+
+    const data=getDoctors();
+
+    const item=data.find(d=>d.id===id);
+
+    if(!item) return;
+
+    item.status="approved";
+
+    saveDoctors(data);
+
+    renderAdminDashboard();
+
+    showToast("Doctor approved. 👨‍⚕️");
+}
+
+function rejectDoctor(id){
+
+    const data=getDoctors();
+
+    const item=data.find(d=>d.id===id);
+
+    if(!item) return;
+
+    item.status="rejected";
+
+    saveDoctors(data);
+
+    renderAdminDashboard();
+
+    showToast("Doctor rejected.");
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(){
+
+    document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+
+    document.getElementById("modal").classList.remove("show");
+}
+
+document.getElementById("modal").addEventListener("click",function(e){
+
+    if(e.target===this){
+        closeModal();
+    }
+
+});
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer=setTimeout(()=>{
+        toast.classList.remove("show");
+    },3000);
+}
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    const dark=document.body.classList.contains("dark");
+
+    localStorage.setItem(
+        "ethioDark",
+        dark ? "true" : "false"
+    );
+
+    document.getElementById("themeBtn").textContent=
+        dark ? "☀️" : "🌙";
+}
+
+function loadDark(){
+
+    const dark=
+        localStorage.getItem("ethioDark")==="true";
+
+    if(dark){
+
+        document.body.classList.add("dark");
+
+        document.getElementById("themeBtn").textContent="☀️";
+    }
+}
+
+/* =========================================================
+   SECURITY / DISPLAY HELPERS
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function safeImage(url){
+
+    if(!url){
+        return "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80";
+    }
+
+    if(
+        url.startsWith("https://") ||
+        url.startsWith("http://")
+    ){
+        return url;
+    }
+
+    return "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80";
+}
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    loadDark();
+
+    renderHospitals();
+
+    renderDoctors();
+
+    loadAppointmentDoctors();
+
+    renderAccount();
+
+    updateAdminScreen();
+
+    /* Minimum appointment date = today */
+
+    const dateInput=document.getElementById("appointmentDate");
+
+    if(dateInput){
+
+        const today=new Date();
+
+        const yyyy=today.getFullYear();
+
+        const mm=String(today.getMonth()+1).padStart(2,"0");
+
+        const dd=String(today.getDate()).padStart(2,"0");
+
+        dateInput.min=`${yyyy}-${mm}-${dd}`;
+    }
+
+});
+
+</script>
+
+</body>
+</html>
